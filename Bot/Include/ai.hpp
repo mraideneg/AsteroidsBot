@@ -22,3 +22,9 @@ private:
     ship_state* left_node(const ship_state& current, ship_state_pool& pool);
     ship_state* right_node(const ship_state& current, ship_state_pool& pool);
 };
+
+extern "C" int best_move(ship_trajectory* bot,
+                         float ship_x, float ship_y,
+                         float ship_vx, float ship_vy,
+                         float ship_angle,
+                         const asteroid_trajectory* asteroids);

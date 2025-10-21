@@ -37,6 +37,16 @@ int ship_trajectory::best_move(float ship_x, float ship_y, float ship_vx, float 
     return best_move;
 }
 
+extern "C" int best_move(ship_trajectory* bot, 
+                         float ship_x, float ship_y, 
+                         float ship_vx, float ship_vy, 
+                         float ship_angle, 
+                         const asteroid_trajectory* asteroids) 
+{
+    return bot->best_move(ship_x, ship_y, ship_vx, ship_vy, ship_angle, *asteroids);
+}
+
+
 void ship_trajectory::construct_tree(ship_state_pool& pool, ship_state& state, const asteroid_trajectory& asteroid_trajectories, int num_asteroids, int layers, int layer){
     // Creates a tree representing all possible trajectories using ship states from the pool
     state.distance = dist_to_collision(&state, &asteroid_trajectories.trajectories[layer * num_asteroids], num_asteroids);
